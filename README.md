@@ -25,21 +25,21 @@ Technologies
 Screenshots
 
 Dashboard
-![Dashboard](screenshots/Dashboard.png)
+![Dashboard](Dashboard.png)
 
 Activities
-![Activities](screenshots/ActivityList.png)
+![Activities](ActivityList.png)
 
 Add Activity
-![Add Activity](screenshots/AddActivity.png)
+![Add Activity](AddActivity.png)
 
 Activity Details
-![Activity Details](screenshots/Details.png)
+![Activity Details](Details.png)
 
 Edit Activity
-![Edit Activity](screenshots/Edit.png)
+![Edit Activity](Edit.png)
 
 Delete Activity
-![Delete Activity](screenshots/Delete.png)
+![Delete Activity](Delete.png)
 
 This project was developed as a personal portfolio project to demonstrate application development, database integration, CRUD functionality, input validation and dashboard reporting.
