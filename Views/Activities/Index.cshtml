@@ -1,0 +1,95 @@
+@model IEnumerable<Tutor_Activity_Tracker.Models.Activity>
+
+@{
+    ViewData["Title"] = "Activities";
+}
+
+<div class="page-header">
+    <div>
+        <h1>Activities</h1>
+        <p>Track and manage your tutoring activities.</p>
+    </div>
+</div>
+
+<div class="section-card">
+
+    <table class="activity-table">
+
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Activity Type</th>
+                <th>Module</th>
+                <th>Number of Students</th>
+                <th>Time (hours)</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @if (!Model.Any())
+            {
+                <tr>
+                    <td colspan="6" class="empty-state">
+                        No activities recorded yet.
+                    </td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var activity in Model)
+                {
+                    <tr>
+
+                        <td>
+                            @activity.Date.ToString("dd MMM yyyy")
+                        </td>
+
+                        <td>
+                            @activity.ActivityType
+                        </td>
+
+                        <td>
+                            @activity.Module
+                        </td>
+
+                        <td>
+                            @activity.StudentsReached
+                        </td>
+
+                        <td>
+                            @activity.Duration hrs
+                        </td>
+
+                        <td class="table-actions">
+
+                            <a asp-action="Details"
+                               asp-route-id="@activity.ActivityId"
+                               class="activity-action details-action">
+                                Details
+                            </a>
+
+                            <a asp-action="Edit"
+                               asp-route-id="@activity.ActivityId"
+                               class="activity-action edit-action">
+                                Edit
+                            </a>
+
+                            <a asp-action="Delete"
+                               asp-route-id="@activity.ActivityId"
+                               class="activity-action delete-action">
+                                Delete
+                            </a>
+
+                        </td>
+
+                    </tr>
+                }
+            }
+
+        </tbody>
+
+    </table>
+
+</div> 

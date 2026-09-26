@@ -1,0 +1,78 @@
+﻿@{
+    ViewData["Title"] = "Tutor Activity Tracker";
+
+    var controller = ViewContext.RouteData.Values["controller"]?.ToString();
+    var action = ViewContext.RouteData.Values["action"]?.ToString();
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"] - Tutor Activity Tracker</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <aside class="sidebar">
+
+            <div class="brand">
+                <div>
+                    <div class="brand-title">Tutor</div>
+                    <div class="brand-subtitle">Activity Tracker</div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+
+                <a asp-controller="Home"
+                   asp-action="Index"
+                   class="nav-item @(controller == "Home" ? "active" : "")">
+                    <span>⌂</span>
+                    <span>Dashboard</span>
+                </a>
+
+                <a asp-controller="Activities"
+                   asp-action="Create"
+                   class="nav-item @(controller == "Activities" && action == "Create" ? "active" : "")">
+                    <span>＋</span>
+                    <span>Add Activity</span>
+                </a>
+
+                <a asp-controller="Activities"
+                   asp-action="Index"
+                   class="nav-item @(controller == "Activities" && action != "Create" ? "active" : "")">
+                    <span>☷</span>
+                    <span>Activities</span>
+                </a>
+
+            </nav>
+
+        </aside>
+
+     
+
+        <main class="main-content">
+
+            @RenderBody()
+
+        </main>
+
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

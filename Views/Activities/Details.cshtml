@@ -1,0 +1,72 @@
+@model Tutor_Activity_Tracker.Models.Activity
+
+@{
+    ViewData["Title"] = "Activity Details";
+}
+
+<div class="page-header">
+    <div>
+        <h1>Activity Details</h1>
+        <p>View the details of this tutoring activity.</p>
+    </div>
+</div>
+
+<div class="details-card">
+
+    <div class="details-grid">
+
+        <div class="detail-item">
+            <div class="detail-label">Activity Type</div>
+            <div class="detail-value">@Model.ActivityType</div>
+        </div>
+
+        <div class="detail-item">
+            <div class="detail-label">Module</div>
+            <div class="detail-value">@Model.Module</div>
+        </div>
+
+        <div class="detail-item">
+            <div class="detail-label">Date</div>
+            <div class="detail-value">
+                @Model.Date.ToString("dd MMM yyyy")
+            </div>
+        </div>
+
+        <div class="detail-item">
+            <div class="detail-label">Time</div>
+            <div class="detail-value">
+                @Model.Duration hours
+            </div>
+        </div>
+
+        <div class="detail-item">
+            <div class="detail-label">Number of Students</div>
+            <div class="detail-value">
+                @Model.StudentsReached
+            </div>
+        </div>
+
+        <div class="detail-item full-width">
+            <div class="detail-label">Notes</div>
+            <div class="detail-value">
+                @Model.Notes
+            </div>
+        </div>
+
+    </div>
+
+    <div class="form-actions">
+
+        <a asp-action="Index" class="secondary-button">
+            Back to Activities
+        </a>
+
+        <a asp-action="Edit"
+           asp-route-id="@Model.ActivityId"
+           class="primary-button">
+            Edit Activity
+        </a>
+
+    </div>
+
+</div>

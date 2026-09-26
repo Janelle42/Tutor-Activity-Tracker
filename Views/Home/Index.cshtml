@@ -1,0 +1,153 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="dashboard-header">
+    <div>
+        <div class="dashboard-eyebrow">TUTOR ACTIVITY TRACKER</div>
+        <h1>Dashboard</h1>
+    </div>
+</div>
+
+<div class="stats-grid">
+
+    <div class="stat-card">
+        <div class="stat-label">Total Activities</div>
+        <div class="stat-value">@ViewBag.TotalActivities</div>
+        <div class="stat-description">Activities recorded</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-label">Total Students</div>
+        <div class="stat-value">@ViewBag.TotalStudents</div>
+        <div class="stat-description">Students supported</div>
+    </div>
+
+    <div class="stat-card">
+        <div class="stat-label">Total Hours</div>
+        <div class="stat-value">@ViewBag.TotalHours</div>
+        <div class="stat-description">Hours of tutoring</div>
+    </div>
+
+</div>
+
+<div class="section-card chart-card">
+
+    <div class="section-heading">
+        <div>
+            <div class="section-title">Tutoring Hours per Month</div>
+            <div class="section-subtitle">Total tutoring hours recorded each month.</div>
+        </div>
+    </div>
+
+    @if (ViewBag.MonthlyHours.Count == 0)
+    {
+        <div class="empty-state">
+            No activity data available yet.
+        </div>
+    }
+    else
+    {
+        var maxHours = 0.0;
+
+        foreach (var item in ViewBag.MonthlyHours)
+        {
+            if (item.Hours > maxHours)
+            {
+                maxHours = item.Hours;
+            }
+        }
+
+        var chartMax = Math.Ceiling(maxHours / 5) * 5;
+
+        if (chartMax < 10)
+        {
+            chartMax = 10;
+        }
+
+        <div class="bar-chart">
+
+            @foreach (var item in ViewBag.MonthlyHours)
+            {
+                var height = (item.Hours / chartMax) * 100;
+
+                <div class="bar-column">
+
+                    <div class="bar-value">
+                        @item.Hours
+                    </div>
+
+                    <div class="bar-wrapper">
+                        <div class="bar"
+                             style="height: @height%;">
+                        </div>
+                    </div>
+
+                    <div class="bar-label">
+                        @item.Month
+                    </div>
+
+                </div>
+            }
+
+        </div>
+    }
+
+</div>
+
+<div class="section-card">
+
+    <div class="section-heading">
+        <div>
+            <div class="section-title">Recent Activities</div>
+            <div class="section-subtitle">Latest tutoring activity recorded in the system.</div>
+        </div>
+
+        <a asp-controller="Activities"
+           asp-action="Index"
+           class="view-all-link">
+            View all
+        </a>
+    </div>
+
+    <table class="activity-table">
+
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Activity</th>
+                <th>Module</th>
+                <th>Students</th>
+                <th>Hours</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @if (ViewBag.RecentActivities.Count == 0)
+            {
+                <tr>
+                    <td colspan="5" class="empty-state">
+                        No activities recorded yet.
+                    </td>
+                </tr>
+            }
+            else
+            {
+                foreach (var activity in ViewBag.RecentActivities)
+                {
+                    <tr>
+                        <td>@activity.Date.ToString("dd MMM yyyy")</td>
+                        <td>@activity.ActivityType</td>
+                        <td>@activity.Module</td>
+                        <td>@activity.StudentsReached</td>
+                        <td>@activity.Duration</td>
+                    </tr>
+                }
+            }
+
+        </tbody>
+
+    </table>
+
+</div>

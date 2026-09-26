@@ -1,0 +1,96 @@
+@model Tutor_Activity_Tracker.Models.Activity
+
+@{
+    ViewData["Title"] = "Edit Activity";
+}
+
+<div class="page-header">
+    <div>
+        <h1>Edit Activity</h1>
+        <p>Update the details of this tutoring activity.</p>
+    </div>
+</div>
+
+<div class="form-card">
+
+    <form asp-action="Edit">
+
+        <input type="hidden" asp-for="ActivityId" />
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="form-grid">
+
+            <div class="form-group">
+                <label asp-for="ActivityType">Activity Type</label>
+                <input asp-for="ActivityType" class="form-control" />
+                <span asp-validation-for="ActivityType" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Module">Module</label>
+                <input asp-for="Module" class="form-control" />
+                <span asp-validation-for="Module" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Date">Date</label>
+                <input asp-for="Date"
+                       class="form-control"
+                       type="date"
+                       max="@DateTime.Today.ToString("yyyy-MM-dd")" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Duration">Time (hours)</label>
+                <input asp-for="Duration"
+                       class="form-control"
+                       type="number"
+                       min="0.5"
+                       max="24"
+                       step="0.5" />
+                <span asp-validation-for="Duration" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="StudentsReached">Number of Students</label>
+                <input asp-for="StudentsReached"
+                       class="form-control"
+                       type="number"
+                       min="1"
+                       max="500" />
+                <span asp-validation-for="StudentsReached" class="text-danger"></span>
+            </div>
+
+            <div class="form-group full-width">
+                <label asp-for="Notes">Notes</label>
+                <textarea asp-for="Notes"
+                          class="form-control"
+                          rows="4"></textarea>
+                <span asp-validation-for="Notes" class="text-danger"></span>
+            </div>
+
+        </div>
+
+        <div class="form-actions">
+
+            <a asp-action="Index" class="secondary-button">
+                Cancel
+            </a>
+
+            <button type="submit" class="primary-button">
+                Save Changes
+            </button>
+
+        </div>
+
+    </form>
+
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+} 
